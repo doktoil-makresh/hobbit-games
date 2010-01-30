@@ -1,0 +1,50 @@
+######################
+### What is it ??? ###
+######################
+
+hobbit-games.sh is a game server monitoring plugin for Hoobitmon/Xymon (http://hobbitmon.sourceforge.net/)
+It's fully GPL, so you can do whatever you want with, but it will keep GPL for ever.
+
+It's not maintained anymore, and has never been tested on anything else than Wolfenstein:Enemy Territory and Warsow game servers. Due to Quakestat usage, it should run on any games supported by Quakestat.
+
+#####################################
+### What are the pre-requisites ? ###
+#####################################
+
+You first need to have a Hobbitmon/Xymon server running. This script is client-side script, so it must be installed by a Hobbitmon/Xymon client.
+It uses : awk, tail and head commands. They are provided on most Linux based OS. Just check in hobbit-games.sh the path are correct.
+It also needs Quakestat, path to quakestat is defined by :
+QUAKESTAT="/usr/bin/quakestat"
+
+###########################
+### How does it works ? ###
+###########################
+
+The script check for game servers status and reports results to Hobbitmon/Xymon server. According to the results, it'll tell monitoring server if the game servers are running/down...
+The game server list is provided in hobbit-games.conf
+Use the following syntax to add your game servers :
+gametype,host:port
+Example :
+warsows,stan.makelofine.org:44400
+Gametype are listed in hobbit-games.conf
+
+#########################################################
+### How could I check activity ? ###
+#########################################################
+
+There is a debug mode included, first, you need to edit hobbit-games.sh, and define the following regarding to your configuration :
+
+AWK="/usr/bin/awk"
+SED="/bin/sed"
+TAIL="/usr/bin/tail"
+CAT="/bin/cat"
+GREP="/bin/grep"
+RM="/bin/rm"
+DATE="/bin/date"
+HEAD="/usr/bin/head"
+
+The default values are correct on a Debian system.
+Then, you juste have to run :
+./hobbit-games.sh game server_ip:server_port
+
+And you'll have the reports sent to monitoring server.
